@@ -1,0 +1,19 @@
+{
+  "name": "1683649-what-to-watch-8",
+  "version": "1.0.0",
+  "description": "* Студент: [Кирилл Кирдий](https://up.htmlacademy.ru/react/8/user/1683649). * Наставник: [Михаил Карямин](https://htmlacademy.ru/profile/id959581).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirdiyk/1683649-what-to-watch-8.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kirdiyk/1683649-what-to-watch-8/issues"
+  },
+  "homepage": "https://github.com/kirdiyk/1683649-what-to-watch-8#readme"
+}

@@ -1,4 +1,4 @@
-import WelcomeScreen from '../welcome-screen/welcome-creen';
+import WelcomeScreen from '../welcome-screen/welcome-screen';
 
  type AppScreenProps = {
    title: string;
