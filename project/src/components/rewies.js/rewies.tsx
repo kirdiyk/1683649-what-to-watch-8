@@ -1,5 +1,7 @@
-import FilmCard from '../film-card/film-card';
+import FilmList from '../film-list/film-list';
+import films from '../../mocks/films';
 import Footer from '../footer/footer';
+import Logo from '../logo/logo';
 
 function Reviews() : JSX.Element {
   return (
@@ -14,11 +16,7 @@ function Reviews() : JSX.Element {
 
           <header className="page-header film-card__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              <Logo />
             </div>
 
             <ul className="user-block">
@@ -88,8 +86,8 @@ function Reviews() : JSX.Element {
                   <div className="review">
                     <blockquote className="review__quote">
                       <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the
-                         glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed
-                         films in years.
+                        glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed
+                        films in years.
                       </p>
 
                       <footer className="review__details">
@@ -104,8 +102,8 @@ function Reviews() : JSX.Element {
                   <div className="review">
                     <blockquote className="review__quote">
                       <p className="review__text">Anderson&apos;s films are too precious for some, but for those of us
-                         willing to lose ourselves in them, they&apos;re a delight. &quot;The Grand Budapest Hotel&quot; is no
-                         different, except that he has added a hint of gravitas to the mix, improving the recipe.
+                        willing to lose ourselves in them, they&apos;re a delight. &quot;The Grand Budapest Hotel&quot; is no
+                        different, except that he has added a hint of gravitas to the mix, improving the recipe.
                       </p>
 
                       <footer className="review__details">
@@ -120,7 +118,7 @@ function Reviews() : JSX.Element {
                   <div className="review">
                     <blockquote className="review__quote">
                       <p className="review__text">I didn&apos;t find it amusing, and while I can appreciate the creativity,
-                         it&apos;s an hour and 40 minutes I wish I could take back.
+                        it&apos;s an hour and 40 minutes I wish I could take back.
                       </p>
 
                       <footer className="review__details">
@@ -136,7 +134,7 @@ function Reviews() : JSX.Element {
                   <div className="review">
                     <blockquote className="review__quote">
                       <p className="review__text">The mannered, madcap proceedings are often delightful, occasionally
-                         silly, and here and there, gruesome and/or heartbreaking.
+                        silly, and here and there, gruesome and/or heartbreaking.
                       </p>
 
                       <footer className="review__details">
@@ -151,7 +149,7 @@ function Reviews() : JSX.Element {
                   <div className="review">
                     <blockquote className="review__quote">
                       <p className="review__text">It is certainly a magical and childlike way of storytelling, even if
-                         the content is a little more adult.
+                        the content is a little more adult.
                       </p>
 
                       <footer className="review__details">
@@ -166,7 +164,7 @@ function Reviews() : JSX.Element {
                   <div className="review">
                     <blockquote className="review__quote">
                       <p className="review__text">It is certainly a magical and childlike way of storytelling, even if
-                         the content is a little more adult.
+                        the content is a little more adult.
                       </p>
 
                       <footer className="review__details">
@@ -188,24 +186,10 @@ function Reviews() : JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__films-list">
-            <FilmCard
-              title = {'Fantastic Beasts: The Crimes of Grindelwald'}
-              image = {'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'}
-            />
-            <FilmCard
-              title = {'Bohemian Rhapsody'}
-              image = {'img/bohemian-rhapsody.jpg'}
-            />
-            <FilmCard
-              title = {'Macbeth'}
-              image = {'img/macbeth.jpg'}
-            />
-            <FilmCard
-              title = {'Aviator'}
-              image = {'img/aviator.jpg'}
-            />
-          </div>
+          <FilmList
+            filmsCount={4}
+            films={films}
+          />
         </section>
 
         <Footer />

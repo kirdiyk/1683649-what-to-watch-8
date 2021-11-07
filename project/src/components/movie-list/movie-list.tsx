@@ -1,4 +1,5 @@
-import FilmCard from '../film-card/film-card';
+import films from '../../mocks/films';
+import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 
@@ -92,13 +93,13 @@ function MovieList() : JSX.Element {
 
               <div className="film-card__text">
                 <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge
-                   Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.
+                  Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.
                 </p>
 
                 <p>Gustave prides himself on providing first-class service to the hotel&apos;s guests, including satisfying
-                   the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies
-                   mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her
-                   murder.
+                  the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies
+                  mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her
+                  murder.
                 </p>
 
                 <p className="film-card__director">
@@ -108,7 +109,7 @@ function MovieList() : JSX.Element {
 
                 <p className="film-card__starring">
                   <strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe
-                     and other
+                    and other
                   </strong>
                 </p>
               </div>
@@ -120,25 +121,10 @@ function MovieList() : JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__films-list">
-            <FilmCard
-              title = {'Fantastic Beasts: The Crimes of Grindelwald'}
-              image = {'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'}
-            />
-            <FilmCard
-              title = {'Bohemian Rhapsody'}
-              image = {'img/bohemian-rhapsody.jpg'}
-            />
-            <FilmCard
-              title = {'Macbeth'}
-              image = {'img/macbeth.jpg'}
-            />
-            <FilmCard
-              title = {'Aviator'}
-              image = {'img/aviator.jpg'}
-            />
-          </div>
+          <FilmList
+            filmsCount={4}
+            films={films}
+          />
         </section>
 
         <Footer />
