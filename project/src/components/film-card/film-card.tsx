@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Film} from '../../types/film';
 import {AppRoute} from '../../const';
+import Video from '../video/video';
 
 type FilmCardProps = {
   film: Film;
@@ -11,10 +12,26 @@ type FilmCardProps = {
 }
 
 function FilmCard({film, name, previewImage, mouseEnterHandler} : FilmCardProps) : JSX.Element {
+  const [isPreviewVideo, setIsPreviewVideo] = useState(false);
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={() => {mouseEnterHandler(film);}}>
+    <article
+      className="small-film-card catalog__films-card"
+      onMouseEnter={() => {
+        mouseEnterHandler(film);
+        setTimeout(() => setIsPreviewVideo(true), 1000);
+      }}
+      onMouseLeave={() => {
+        setIsPreviewVideo(false);
+      }}
+    >
       <div className="small-film-card__image">
-        <img src={previewImage} alt={name} width="280" height="175"/>
+        {isPreviewVideo ?
+          <Video
+            videoPreviewLink={film.previewVideoLink}
+            autoPlay
+            muted
+            posterImage={film.posterImage}
+          /> : <img src={previewImage} alt={name} width="280" height="175"/>}
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`${AppRoute.Film}${film.id}`}>{name}</Link>
