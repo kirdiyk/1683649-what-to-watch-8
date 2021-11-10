@@ -16,10 +16,7 @@ function FilmCard({film, name, previewImage, mouseEnterHandler} : FilmCardProps)
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseEnter={() => {
-        mouseEnterHandler(film);
-        setTimeout(() => setIsPreviewVideo(true), 1000);
-      }}
+      onMouseEnter={() => mouseEnterHandler(film)}
       onMouseLeave={() => {
         setIsPreviewVideo(false);
       }}

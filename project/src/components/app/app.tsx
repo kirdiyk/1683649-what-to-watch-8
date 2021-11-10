@@ -28,7 +28,7 @@ function App({film, films, filmsCount}: AppScreenProps): JSX.Element {
             filmsCount={filmsCount}
           />
         </Route>
-        <Route exact path='/review'>
+        <Route exact path={AppRoute.AddReview}>
           <ReviewForm />
         </Route>
         <Route exact path={AppRoute.Login}>
