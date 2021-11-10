@@ -12,27 +12,35 @@ type FilmCardProps = {
 }
 
 function FilmCard({film, name, previewImage, mouseEnterHandler} : FilmCardProps) : JSX.Element {
-  const [isPreviewVideo, setIsPreviewVideo] = useState(false);
+  const [isPlay, setIsPlayVideo] = useState(false);
+  const [timeoutId, setTimeoutId] = useState <ReturnType<typeof setTimeout>> ();
+
   return (
     <article
       className="small-film-card catalog__films-card"
       onMouseEnter={() => {
         mouseEnterHandler(film);
-        setTimeout(() => setIsPreviewVideo(true), 1000);
+        const currentTimeoutId = setTimeout(() => {
+          setIsPlayVideo(true);
+        }, 1000);
+        setTimeoutId(currentTimeoutId);
       }}
       onMouseLeave={() => {
-        setIsPreviewVideo(false);
+        setIsPlayVideo(false);
+        if (timeoutId){
+          clearTimeout(timeoutId);
+        }
       }}
     >
       <div className="small-film-card__image">
-        {isPreviewVideo ?
-          <Video
-            videoPreviewLink={film.previewVideoLink}
-            autoPlay
-            muted
-            posterImage={film.posterImage}
-          /> : <img src={previewImage} alt={name} width="280" height="175"/>}
+        <Video
+          videoPreviewLink={film.previewVideoLink}
+          posterImage={film.posterImage}
+          isPlay = {isPlay}
+          muted
+        />
       </div>
+
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`${AppRoute.Film}${film.id}`}>{name}</Link>
       </h3>
