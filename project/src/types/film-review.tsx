@@ -3,7 +3,7 @@ export type User = {
   name: string,
 }
 
-export type Review = {
+export type ReviewId = {
   id: number,
   user: User,
   rating: number,
@@ -13,5 +13,5 @@ export type Review = {
 
 export type FilmReview = {
   filmId: number,
-  reviews: Review | Review[],
+  reviews: ReviewId[],
 }
