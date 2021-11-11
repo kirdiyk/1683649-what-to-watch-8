@@ -5,7 +5,7 @@ import {AppRoute, CLASS_TAB_ACTIVE, Rating, TabType} from '../../const';
 import {formatDate, humanizeDate} from '../../utils';
 import Review from '../review/review';
 import {reviews} from '../../mocks/review';
-import {ReviewId} from '../../types/film-review';
+//import {ReviewId} from '../../types/film-review';
 
 type TabsProps = {
   film: Film;
@@ -27,13 +27,7 @@ function Tabs({film}: TabsProps): JSX.Element {
 
   const filmReviews = reviews.find((review) => String(review.filmId) === film.id);
 
-  let filmUserReviews: ReviewId[];
-
-  if (filmReviews) {
-    if (filmReviews.reviews.length > 0) {
-      filmUserReviews = filmReviews.reviews;
-    }
-  }
+  const hasReviews = Boolean(filmReviews?.reviews?.length);
 
   function getRating(filmRating: number) {
     switch (true) {
@@ -111,7 +105,7 @@ function Tabs({film}: TabsProps): JSX.Element {
         return (
           <div className="film-card__reviews film-card__row">
             <div className="film-card__reviews-col">
-              {filmUserReviews !== null ? filmUserReviews.map((review) => (
+              {hasReviews && (filmReviews?.reviews.map((review) => (
                 <Review
                   key = {review.id}
                   film={film}
@@ -120,8 +114,7 @@ function Tabs({film}: TabsProps): JSX.Element {
                   dateText={humanizeDate(review.date)}
                   rating={review.rating}
                   quote={review.comment}
-                />),
-              ) : ''}
+                />)))}
             </div>
           </div>
         );
