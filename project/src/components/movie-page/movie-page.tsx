@@ -12,7 +12,7 @@ type MoviePageProps = {
 }
 
 type FilmParam = {
-  id: number;
+  id: string;
 }
 
 function MoviePage({similarFilms}: MoviePageProps) : JSX.Element {
