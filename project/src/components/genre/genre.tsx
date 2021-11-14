@@ -5,10 +5,11 @@ import {MouseEvent} from 'react';
 import {Film} from '../../types/film';
 import {CLASS_GENRE_ACTIVE, ALL_GENRES, AppRoute} from '../../const';
 import {States} from '../../types/states';
-import {changeGenre} from '../../store/function';
+import {changeGenre} from '../../store/actions';
 
 type GenreProps = {
   films: Film[];
+  currentGenre: string;
 }
 
 const mapStateToProps = ({currentGenre}: States) => ({
@@ -53,5 +54,5 @@ function Genre(props: ConnectedComponentProps): JSX.Element {
   );
 }
 
-export {Genre};
+//export {Genre};
 export default connector(Genre);

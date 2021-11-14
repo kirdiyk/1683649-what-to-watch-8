@@ -5,7 +5,7 @@ import {Film} from '../../types/film';
 import {AppRoute, ALL_GENRES} from '../../const';
 import {connect, ConnectedProps} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import {Genre} from '../genre/genre';
+import Genre from '../genre/genre';
 import {States} from '../../types/states';
 
 type FilmProps = {
@@ -117,4 +117,4 @@ function WelcomeScreen(props: ConnectedComponentProps): JSX.Element {
   );
 }
 
-export default WelcomeScreen;
+export default connector (WelcomeScreen);
