@@ -11,17 +11,12 @@ const store = createStore(
   composeWithDevTools(),
 );
 
-const Settings = {
-  FILMS_COUNT: 20,
-};
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
       <App
         film={films[5]}
         films={films}
-        filmsCount={Settings.FILMS_COUNT}
       />
     </Provider>
   </React.StrictMode>,

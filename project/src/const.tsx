@@ -47,3 +47,5 @@ export const CLASS_TAB_ACTIVE = 'film-nav__item--active';
 export const ALL_GENRES = 'All genres';
 
 export const CLASS_GENRE_ACTIVE = 'catalog__genres-item--active';
+
+export const STEP_FILMS = 8;
