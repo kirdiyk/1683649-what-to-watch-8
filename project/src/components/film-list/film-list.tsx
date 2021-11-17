@@ -2,16 +2,16 @@ import {useState} from 'react';
 import FilmCard from '../film-card/film-card';
 import {Film} from '../../types/film';
 
- type FilmListProps = {
-   filmsCount: number;
-   films: Film[];
- }
+type FilmListProps = {
+  filmsCount: number;
+  films: Film[];
+}
 
 function FilmList({filmsCount, films} : FilmListProps) : JSX.Element {
   const cards = films.length <= filmsCount ? films : films.slice(0, filmsCount);
 
   const [activeFilm, setActiveFilm] = useState({
-    id: '',
+    id: 0,
     name: '',
     posterImage: '',
     previewImage: '',

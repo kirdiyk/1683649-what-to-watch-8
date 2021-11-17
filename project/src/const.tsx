@@ -1,7 +1,7 @@
 export enum AppRoute {
   Root = '/',
   Login = '/login',
-  MyList = '/mylist',
+  OwnList = '/mylist',
   AddReview = '/review',
   Film = '/films/',
   Player = '/player/',
@@ -40,6 +40,13 @@ export enum Rating {
   Good = 'Good',
   VeryGood = 'Very good',
   Awesome = 'Awesome',
+}
+
+export enum APIRoute {
+  Promo = '/promo',
+  Films = '/films',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export const CLASS_TAB_ACTIVE = 'film-nav__item--active';

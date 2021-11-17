@@ -1,11 +1,12 @@
 import {Link, useParams, useHistory} from 'react-router-dom';
 import FilmList from '../film-list/film-list';
 import {Film} from '../../types/film';
-import films from '../../mocks/films';
 import {AppRoute} from '../../const';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import Tabs from '../tabs/tabs';
+import {States} from '../../types/states';
+import {connect, ConnectedProps} from 'react-redux';
 
 type MoviePageProps = {
   similarFilms: Film[];
@@ -15,11 +16,20 @@ type FilmParam = {
   id: string;
 }
 
-function MoviePage({similarFilms}: MoviePageProps) : JSX.Element {
+const mapStatesProps = ({films}: States) => ({films});
+
+const connector = connect(mapStatesProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = MoviePageProps & PropsFromRedux;
+
+function MoviePage(props: Props) : JSX.Element {
+  const {similarFilms, films} = props;
   const {id} = useParams<FilmParam>();
   const history = useHistory();
 
-  const currentFilm = films.find((film: Film) => film.id === id);
+  const currentFilm = films.find((film: Film) => film.id === Number(id));
   if (!currentFilm) {
     throw '404';
   }
@@ -43,7 +53,7 @@ function MoviePage({similarFilms}: MoviePageProps) : JSX.Element {
 
             <ul className="user-block">
               <li className="user-block__item">
-                <div className="user-block__avatar" onClick={() => history.push(AppRoute.MyList)}>
+                <div className="user-block__avatar" onClick={() => history.push(AppRoute.OwnList)}>
                   <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
                 </div>
               </li>

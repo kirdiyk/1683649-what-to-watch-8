@@ -4,8 +4,8 @@ import {connect, ConnectedProps} from 'react-redux';
 import {MouseEvent} from 'react';
 import {Film} from '../../types/film';
 import {CLASS_GENRE_ACTIVE, ALL_GENRES, AppRoute} from '../../const';
-import {States} from '../../types/states';
-import {changeGenre, resetFilmNumberLimit} from '../../store/actions';
+import { States } from '../../types/states';
+import {changeGenre, resetFilmLimit} from '../../store/actions';
 
 type GenreProps = {
   films: Film[];
@@ -19,7 +19,7 @@ const mapStateToProps = ({currentGenre}: States) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onChangeGenre(genre: string) {
     dispatch(changeGenre(genre));
-    dispatch(resetFilmNumberLimit());
+    dispatch(resetFilmLimit());
   },
 });
 
