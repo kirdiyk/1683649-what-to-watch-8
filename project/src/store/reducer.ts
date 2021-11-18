@@ -1,13 +1,10 @@
 import {ActionType, Actions} from '../types/action';
 import {States} from '../types/states';
-import films from '../mocks/films';
+//import films from '../mocks/films';
 import {AuthorizationStatus, STEP_FILMS} from '../const';
-
-const initialFilms = films.slice();
 
 const initialState = {
   currentGenre: 'All genres',
-  films: initialFilms,
   limitCounter: 1,
   filmNumberLimit: STEP_FILMS,
 } as States;

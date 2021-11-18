@@ -2,7 +2,7 @@ import {Film} from '../types/film';
 
 export const films : Film[] = [
   {
-    id: '0',
+    id: 0,
     name: 'We need to talk about Kevin',
     posterImage: 'https://8.react.pages.academy/static/film/poster/We_need_to_talk_about_Kevin.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/we-need-to-talk-about-kevin.jpg',
@@ -22,7 +22,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '1',
+    id: 1,
     name: 'Orlando',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Orlando.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/orlando.jpg',
@@ -42,7 +42,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '2',
+    id: 2,
     name: 'Johnny English',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Johnny_English.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/johnny-english.jpg',
@@ -62,7 +62,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '3',
+    id: 3,
     name: 'Shutter Island',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Shutter_Island.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/shutter-island.jpg',
@@ -82,7 +82,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '4',
+    id: 4,
     name: 'Once Upon a Time in America',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Once_Upon_a_Time_in_America.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/Once_Upon_a_Time_in_America.jpg',
@@ -102,7 +102,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '5',
+    id: 5,
     name: 'Bohemian Rhapsody',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Bohemian_Rhapsody.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/bohemian_rhapsody.jpg',
@@ -122,7 +122,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '6',
+    id: 6,
     name: 'Seven Years in Tibet',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Seven_Years_in_Tibet.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/seven-years-in-tibet.jpg',
@@ -142,7 +142,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '7',
+    id: 7,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',
@@ -162,7 +162,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '8',
+    id: 8,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',
@@ -182,7 +182,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '9',
+    id: 9,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',
@@ -202,7 +202,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '10',
+    id: 10,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',
@@ -222,7 +222,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '11',
+    id: 11,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',
@@ -242,7 +242,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '12',
+    id: 12,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',
@@ -262,7 +262,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '13',
+    id: 13,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',
@@ -282,7 +282,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '14',
+    id: 14,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',
@@ -302,7 +302,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '15',
+    id: 15,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',
@@ -322,7 +322,7 @@ export const films : Film[] = [
     isFavorite: false,
   },
   {
-    id: '16',
+    id: 16,
     name: 'Pulp Fiction',
     posterImage: 'https://8.react.pages.academy/static/film/poster/Pulp_Fiction.jpg',
     previewImage: 'https://8.react.pages.academy/static/film/preview/pulp-fiction.jpg',

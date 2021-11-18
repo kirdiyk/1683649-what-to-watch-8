@@ -25,7 +25,7 @@ function Tabs({film}: TabsProps): JSX.Element {
 
   const [activeTab, setActiveTab] = useState(TabType.Overview);
 
-  const filmReviews = reviews.find((review) => review.filmId === film.id);
+  const filmReviews = reviews.find((review) => (review.filmId) === id);
 
   const hasReviews = Boolean(filmReviews?.reviews?.length);
 

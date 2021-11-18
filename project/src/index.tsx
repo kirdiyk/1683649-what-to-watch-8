@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {reducer} from './store/reducer';
-import {createAPI} from './api';
+import { createAPI } from './api';
 import {requireAuthorization} from './store/actions';
 import {fetchFilmAction, checkAuthAction, fetchPromoFilmAction} from './store/actions-api';
 import {ThunkAppDispatch} from './types/action';

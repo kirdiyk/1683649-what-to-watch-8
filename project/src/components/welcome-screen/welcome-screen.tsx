@@ -9,11 +9,11 @@ import Genre from '../genre/genre';
 import {States} from '../../types/states';
 import ShowMore from '../show-more/show-more';
 
-const mapStatesProps = ({currentGenre, promoFilm, films, filmNumberLimit}: States) => ({
+const mapStatesProps = ({currentGenre, promo, films, filmNumberLimit}: States) => ({
   currentGenre: currentGenre,
+  promo,
   films,
   filmNumberLimit,
-  promoFilm,
 });
 
 const connector = connect(mapStatesProps);
@@ -28,10 +28,13 @@ function getFilmsByGenre(genre: string, films: Film[]) {
 }
 
 function WelcomeScreen(props: PropsFromRedux): JSX.Element {
-  const {promoFilm, currentGenre, films, filmNumberLimit} = props;
-  const {id, name, genre, released, posterImage, backgroundImage} = promoFilm;
+  const {promo, currentGenre, films, filmNumberLimit} = props;
+  const {id, name, genre, released, posterImage, backgroundImage} = promo;
+
   const history = useHistory();
+
   const filmsByGenre = getFilmsByGenre(currentGenre, films);
+
   return (
     <>
       <section className="film-card">
@@ -43,9 +46,7 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element {
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
-              <Logo/>
-            </a>
+            <Logo />
           </div>
 
           <ul className="user-block">
@@ -74,7 +75,11 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={() => history.push(`${AppRoute.Player}${id}`)}>
+                <button
+                  className="btn btn--play film-card__button"
+                  type="button"
+                  onClick={() => history.push(`${AppRoute.Player}${id}`)}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -105,6 +110,7 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element {
           />
 
           {filmsByGenre.length > filmNumberLimit ? <ShowMore /> : ''}
+
         </section>
 
         <Footer />
@@ -112,5 +118,6 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element {
     </>
   );
 }
+
 
 export default connector (WelcomeScreen);

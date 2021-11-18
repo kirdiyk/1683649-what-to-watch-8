@@ -29,7 +29,7 @@ function MoviePage(props: Props) : JSX.Element {
   const {id} = useParams<FilmParam>();
   const history = useHistory();
 
-  const currentFilm = films.find((film: Film) => film.id === Number(id));
+  const currentFilm = films.find((film: Film) => String(film.id) === id);
   if (!currentFilm) {
     throw '404';
   }
@@ -96,7 +96,10 @@ function MoviePage(props: Props) : JSX.Element {
               <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327"/>
             </div>
             <Tabs
-              film={currentFilm}
+              //tab = {''}
+              film = {currentFilm}
+              //comments = {undefined}
+              //onClick = {''}
             />
           </div>
         </div>
@@ -118,4 +121,4 @@ function MoviePage(props: Props) : JSX.Element {
   );
 }
 
-export default MoviePage;
+export default connector(MoviePage);
