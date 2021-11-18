@@ -27,11 +27,13 @@ function getFilmsByGenre(genre: string, films: Film[]) {
   return films.filter((film) => film.genre === genre);
 }
 
-function WelcomeScreen(props: PropsFromRedux): JSX.Element {
+function WelcomeScreen(props: PropsFromRedux): JSX.Element | null {
+  const history = useHistory();
+  const isLoadedPromo = !!props.promo;
+  if (!isLoadedPromo) {return null;}
+
   const {promo, currentGenre, films, filmNumberLimit} = props;
   const {id, name, genre, released, posterImage, backgroundImage} = promo;
-
-  const history = useHistory();
 
   const filmsByGenre = getFilmsByGenre(currentGenre, films);
 
