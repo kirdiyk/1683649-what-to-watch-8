@@ -1,6 +1,6 @@
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import SignIn from '../sign-in/sign-in';
 import OwnList from '../own-list/own-list';
@@ -12,20 +12,20 @@ import AddReview from '../add-review/add-review';
 import ReviewForm from '../review-form/review-form';
 import {States} from '../../types/states';
 import Loading from '../loading/loading';
+import BrowserHistory from '../../browser-history/browser-history';
 
-const mapStateToProps = ({promo, films, authorizationStatus, isDataLoaded}: States) => ({
+const mapStatesProps = ({promo, films, isDataLoaded}: States) => ({
   promo,
   films,
-  //authorizationStatus,
   isDataLoaded,
 });
 
-const connector = connect(mapStateToProps);
+const connector = connect(mapStatesProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function App(props : PropsFromRedux): JSX.Element {
-  const {promo, films, /*authorizationStatus, */isDataLoaded} = props;
+  const {promo, films, isDataLoaded} = props;
 
   if (!isDataLoaded) {
     return (
@@ -34,7 +34,7 @@ function App(props : PropsFromRedux): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={BrowserHistory}>
       <Switch>
         <Route exact path={AppRoute.Root}>
           <WelcomeScreen />
@@ -47,32 +47,25 @@ function App(props : PropsFromRedux): JSX.Element {
         </Route>
         <PrivateRoute
           exact
-          path={AppRoute.OwnList}
-          render={() => <OwnList myFilms={films}/>}
-          authorizationStatus={AuthorizationStatus.NoAuth}
+          path = {AppRoute.OwnList}
+          render = {({history}) => <OwnList ownFilms = {films}/>}
         >
         </PrivateRoute>
         <PrivateRoute
           exact
           path={`${AppRoute.Film}:id${AppRoute.AddReview}`}
-          render={() => (
-            <AddReview
-              film={promo}
-            />)}
-          authorizationStatus={AuthorizationStatus.NoAuth}
+          render={() => (<AddReview/>)}
         >
         </PrivateRoute>
         <Route exact path={`${AppRoute.Film}:id`}>
-          <MoviePage
-            similarFilms={films}
-          />
+          <MoviePage />
         </Route>
         <Route exact path={`${AppRoute.Player}:id`}>
           <PlayerControl
             film={promo}
           />
         </Route>
-        <Route>
+        <Route exact path={AppRoute.Page404}>
           <Page404 />
         </Route>
       </Switch>
@@ -80,5 +73,4 @@ function App(props : PropsFromRedux): JSX.Element {
   );
 }
 
-export {App};
 export default connector(App);

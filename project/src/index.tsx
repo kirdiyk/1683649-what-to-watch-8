@@ -11,15 +11,17 @@ import {requireAuthorization} from './store/actions';
 import {fetchFilmAction, checkAuthAction, fetchPromoFilmAction} from './store/actions-api';
 import {ThunkAppDispatch} from './types/action';
 import {AuthorizationStatus} from './const';
+import {redirect} from './store/middlewares/redirect';
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
 );
 
-const store = createStore(
+export const store = createStore(
   reducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument(api)),
+    applyMiddleware(redirect),
   ),
 );
 

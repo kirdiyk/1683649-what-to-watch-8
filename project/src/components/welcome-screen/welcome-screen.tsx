@@ -2,14 +2,15 @@ import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import FilmList from '../film-list/film-list';
 import {Film} from '../../types/film';
-import {AppRoute, ALL_GENRES} from '../../const';
+import {AppRoute, ALL_GENRES, FilmListType} from '../../const';
 import {connect, ConnectedProps} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import Genre from '../genre/genre';
 import {States} from '../../types/states';
 import ShowMore from '../show-more/show-more';
+import User from '../user/user';
 
-const mapStatesProps = ({currentGenre, promo, films, filmNumberLimit}: States) => ({
+const mapStatesProps = ({currentGenre, promo, films, filmNumberLimit, authorizationStatus}: States) => ({
   currentGenre: currentGenre,
   promo,
   films,
@@ -51,16 +52,7 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element | null {
             <Logo />
           </div>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <User />
         </header>
 
         <div className="film-card__wrap">
@@ -108,7 +100,7 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element | null {
 
           <FilmList
             filmsCount={filmsByGenre.length > filmNumberLimit ? filmNumberLimit : filmsByGenre.length}
-            films={filmsByGenre}
+            typeList={FilmListType.MainList}
           />
 
           {filmsByGenre.length > filmNumberLimit ? <ShowMore /> : ''}
@@ -120,6 +112,5 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element | null {
     </>
   );
 }
-
 
 export default connector (WelcomeScreen);

@@ -7,6 +7,11 @@ import {
 } from 'axios';
 import {States} from '../types/states';
 import {
+  loadFilm,
+  loadSimilarFilms,
+  loadComments,
+  changeUser,
+  redirectToRoute,
   loadPromo,
   loadFilms,
   changeGenre,
@@ -19,6 +24,11 @@ import {
 export enum ActionType {
   LoadPromo = 'data/loadPromoFilm',
   LoadFilms = 'data/loadFilms',
+  LoadFilm = 'data/loadFilm',
+  LoadSimilarFilms = 'data/loadSimilarFilms',
+  LoadComments = 'data/loadComments',
+  ChangeUser = 'user/user',
+  RedirectToRoute = 'filmList/redirectToRoute',
   ChangeGenre = 'filmList/changeGenre',
   ChangeLimitCounter = 'filmList/changeLimitCounter',
   ChangeFilmLimit = 'filmList/changeFilmNumberLimit',
@@ -36,7 +46,13 @@ export type Actions =
   | ReturnType<typeof changeFilmLimit>
   | ReturnType<typeof resetFilmLimit>
   | ReturnType<typeof requireAuthorization>
-  | ReturnType<typeof requireLogout>;
+  | ReturnType<typeof requireLogout>
+  | ReturnType<typeof loadFilm>
+  | ReturnType<typeof loadSimilarFilms>
+  | ReturnType<typeof loadComments>
+  | ReturnType<typeof requireLogout>
+  | ReturnType<typeof changeUser>
+  | ReturnType<typeof redirectToRoute>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, States, AxiosInstance, Actions>;
 

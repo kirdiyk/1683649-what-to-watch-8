@@ -1,21 +1,27 @@
-import { useRef, useEffect} from 'react';
+import { useRef, useEffect, useState} from 'react';
 
 type VideoProps = {
   videoPreviewLink: string;
-  isPlay: boolean;
-  muted: boolean;
   posterImage: string;
 }
 
-function Video({videoPreviewLink, isPlay, muted, posterImage}: VideoProps): JSX.Element {
+function Video({videoPreviewLink, posterImage}: VideoProps): JSX.Element {
+  const [isLoading, setIsLoading] = useState(true);
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (videoRef.current === null) {return undefined;}
+    if (videoRef.current !== null) {
+      videoRef.current.onloadeddata = () => setIsLoading(!isLoading);
+    }
 
-    isPlay && videoRef.current?.play();
-    !isPlay && videoRef.current?.load();
-  }, [isPlay]);
+    return () => {
+      if (videoRef.current !== null) {
+        videoRef.current.onloadeddata = null;
+        videoRef.current = null;
+      }
+    };
+  }, [videoPreviewLink]);
 
   return (
     <video
@@ -24,8 +30,7 @@ function Video({videoPreviewLink, isPlay, muted, posterImage}: VideoProps): JSX.
       className="player__video"
       width="280"
       height="175"
-      preload="metadata"
-      muted={muted}
+      autoPlay muted
       poster={posterImage}
     >
     </video>

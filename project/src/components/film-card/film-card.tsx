@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {Link} from 'react-router-dom';
 import {Film} from '../../types/film';
 import {AppRoute} from '../../const';
@@ -6,43 +6,36 @@ import Video from '../video/video';
 
 type FilmCardProps = {
   film: Film;
-  name: string;
-  previewImage: string;
-  mouseEnterHandler: (film : Film) => void;
 }
 
-function FilmCard({film, name, previewImage, mouseEnterHandler} : FilmCardProps) : JSX.Element {
-  const [isPlay, setIsPlayVideo] = useState(false);
-  const [timeoutId, setTimeoutId] = useState <ReturnType<typeof setTimeout>> ();
+function FilmCard({film}: FilmCardProps) : JSX.Element {
+  const activeRef = useRef<boolean>(false);
+  const [isPreviewVideo, setIsPreviewVideo] = useState(false);
 
   return (
     <article
       className="small-film-card catalog__films-card"
       onMouseEnter={() => {
-        mouseEnterHandler(film);
-        const currentTimeoutId = setTimeout(() => {
-          setIsPlayVideo(true);
+        activeRef.current = true;
+
+        setTimeout(() => {
+          if (activeRef.current) {
+            setIsPreviewVideo(true);
+          }
         }, 1000);
-        setTimeoutId(currentTimeoutId);
       }}
       onMouseLeave={() => {
-        setIsPlayVideo(false);
-        if (timeoutId){
-          clearTimeout(timeoutId);
-        }
+        activeRef.current = false;
+        setIsPreviewVideo(false);
       }}
     >
       <div className="small-film-card__image">
-        <Video
-          videoPreviewLink={film.previewVideoLink}
-          posterImage={film.posterImage}
-          isPlay = {isPlay}
-          muted
-        />
+        {isPreviewVideo ?
+          <Video videoPreviewLink={film.previewVideoLink} posterImage={film.posterImage} />
+          : <img src={film.previewImage} alt={film.name} width="280" height="175"/>}
       </div>
-
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`${AppRoute.Film}${film.id}`}>{name}</Link>
+        <Link className="small-film-card__link" to={`${AppRoute.Film}${film.id}`}>{film.name}</Link>
       </h3>
     </article>
   );

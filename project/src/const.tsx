@@ -5,6 +5,7 @@ export enum AppRoute {
   AddReview = '/review',
   Film = '/films/',
   Player = '/player/',
+  Page404 = '/page-not-found',
 }
 
 export enum AuthorizationStatus {
@@ -47,6 +48,14 @@ export enum APIRoute {
   Films = '/films',
   Login = '/login',
   Logout = '/logout',
+  Similar = '/similar',
+  Comments = '/comments',
+}
+
+export enum FilmListType {
+  MainList = 'MainList',
+  SimilarList = 'SimilarList',
+  UserList = 'UserList',
 }
 
 export const CLASS_TAB_ACTIVE = 'film-nav__item--active';
@@ -56,3 +65,5 @@ export const ALL_GENRES = 'All genres';
 export const CLASS_GENRE_ACTIVE = 'catalog__genres-item--active';
 
 export const STEP_FILMS = 8;
+
+export const SIMILAR_FILM_NUMBER = 4;

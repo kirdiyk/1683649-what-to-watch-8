@@ -1,38 +1,42 @@
 import {Link, useParams, useHistory} from 'react-router-dom';
+import {useEffect} from 'react';
+import {connect, ConnectedProps} from 'react-redux';
 import FilmList from '../film-list/film-list';
-import {Film} from '../../types/film';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus, FilmListType, SIMILAR_FILM_NUMBER} from '../../const';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import Tabs from '../tabs/tabs';
 import {States} from '../../types/states';
-import {connect, ConnectedProps} from 'react-redux';
-
-type MoviePageProps = {
-  similarFilms: Film[];
-}
+import User from '../user/user';
+import {fetchCommentsAction, fetchFilmInfoAction, fetchSimilarFilmsAction} from '../../store/actions-api';
+import {ThunkAppDispatch} from '../../types/action';
+import {store} from '../../index';
 
 type FilmParam = {
   id: string;
 }
 
-const mapStatesProps = ({films}: States) => ({films});
+const mapStatesProps = ({currentFilm, comments, authorizationStatus}: States) => ({
+  currentFilm,
+  comments,
+  authorizationStatus,
+});
 
 const connector = connect(mapStatesProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type Props = MoviePageProps & PropsFromRedux;
-
-function MoviePage(props: Props) : JSX.Element {
-  const {similarFilms, films} = props;
+function MoviePage(props: PropsFromRedux) : JSX.Element {
+  const {currentFilm, comments, authorizationStatus} = props;
   const {id} = useParams<FilmParam>();
-  const history = useHistory();
 
-  const currentFilm = films.find((film: Film) => String(film.id) === id);
-  if (!currentFilm) {
-    throw '404';
-  }
+  useEffect(() => {
+    (store.dispatch as ThunkAppDispatch)(fetchFilmInfoAction(Number(id)));
+    (store.dispatch as ThunkAppDispatch)(fetchSimilarFilmsAction(Number(id)));
+    (store.dispatch as ThunkAppDispatch)(fetchCommentsAction(Number(id)));
+  }, [id]);
+
+  const history = useHistory();
 
   return (
     <>
@@ -50,17 +54,7 @@ function MoviePage(props: Props) : JSX.Element {
                 <Logo/>
               </a>
             </div>
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar" onClick={() => history.push(AppRoute.OwnList)}>
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <User/>
           </header>
 
           <div className="film-card__wrap">
@@ -84,7 +78,12 @@ function MoviePage(props: Props) : JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`${AppRoute.Film}${id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth ?
+                    <Link className="btn film-card__button" to={`${AppRoute.Film}${id}${AppRoute.AddReview}`}>
+                      Add review
+                    </Link> : ''
+                }
               </div>
             </div>
           </div>
@@ -96,10 +95,8 @@ function MoviePage(props: Props) : JSX.Element {
               <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327"/>
             </div>
             <Tabs
-              //tab = {''}
               film = {currentFilm}
-              //comments = {undefined}
-              //onClick = {''}
+              comments = {comments}
             />
           </div>
         </div>
@@ -109,10 +106,7 @@ function MoviePage(props: Props) : JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmList
-            filmsCount={4}
-            films={similarFilms}
-          />
+          <FilmList typeList={FilmListType.SimilarList} filmsCount={SIMILAR_FILM_NUMBER}/>
         </section>
 
         <Footer />
