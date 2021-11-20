@@ -18,9 +18,9 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
- type PropsFromRedux = ConnectedProps<typeof connector>;
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
-function UserBlock(props: PropsFromRedux): JSX.Element {
+function User(props: PropsFromRedux): JSX.Element {
   const {authorizationStatus, user, onLogout} = props;
 
   return (
@@ -29,7 +29,7 @@ function UserBlock(props: PropsFromRedux): JSX.Element {
         <div className="user-block__avatar">
           <Link to={AppRoute.OwnList}>
             <img
-              src={user.avatarUrl === '' ? 'img/unauthorizedUser.png' : user.avatarUrl}
+              src={user.avatarUrl === '' ? 'img/avatar.jpg' : user.avatarUrl}
               alt="User avatar"
               width="63"
               height="63"
@@ -51,4 +51,4 @@ function UserBlock(props: PropsFromRedux): JSX.Element {
     </ul>);
 }
 
-export default connector(UserBlock);
+export default connector(User);

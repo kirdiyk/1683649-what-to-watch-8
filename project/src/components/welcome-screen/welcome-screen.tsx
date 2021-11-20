@@ -30,7 +30,7 @@ function getFilmsByGenre(genre: string, films: Film[]) {
 
 function WelcomeScreen(props: PropsFromRedux): JSX.Element | null {
   const history = useHistory();
-  const isLoadedPromo = !!props.promo;
+  const isLoadedPromo = props.promo.id !== -1;
   if (!isLoadedPromo) {return null;}
 
   const {promo, currentGenre, films, filmNumberLimit} = props;

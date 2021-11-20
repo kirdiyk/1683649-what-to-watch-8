@@ -48,7 +48,7 @@ const initialState = {
 const reducer = (state: States = initialState, action: Actions): States => {
   switch (action.type) {
     case ActionType.LoadPromo:
-      return {...state, promoFilm: action.payload} as States;
+      return {...state, promo: action.payload} as States;
     case ActionType.LoadFilm:
       return {...state, currentFilm: action.payload} as States;
     case ActionType.LoadFilms:

@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
- type PropsFromRedux = ConnectedProps<typeof connector>;
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function ShowMore({onShowMore}: PropsFromRedux): JSX.Element {
   return (
