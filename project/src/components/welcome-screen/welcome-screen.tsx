@@ -1,25 +1,19 @@
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import FilmList from '../film-list/film-list';
 import {Film} from '../../types/film';
-import {AppRoute, ALL_GENRES, FilmListType} from '../../const';
-import {connect, ConnectedProps} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {ALL_GENRES} from '../../const';
 import Genre from '../genre/genre';
-import {States} from '../../types/states';
 import ShowMore from '../show-more/show-more';
 import User from '../user/user';
-
-const mapStatesProps = ({currentGenre, promo, films, filmNumberLimit, authorizationStatus}: States) => ({
-  currentGenre: currentGenre,
-  promo,
-  films,
-  filmNumberLimit,
-});
-
-const connector = connect(mapStatesProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
+import {getCurrentGenre, getFilmLimit} from '../../store/catalog-process/selectors';
+import {getFilms, getPromo} from '../../store/films-data/selectors';
+import PlayerBtn from '../player-btn/player-btn';
+import OwnListBtn from '../own-list-btn/own-list-btn';
+import { changeGenre, loadPromo, resetFavoriteFilms, resetFilmLimit} from '../../store/actions';
+import {getFavoriteFilms} from '../../store/user-process/selectors';
 
 function getFilmsByGenre(genre: string, films: Film[]) {
   if (genre === ALL_GENRES) {
@@ -28,15 +22,28 @@ function getFilmsByGenre(genre: string, films: Film[]) {
   return films.filter((film) => film.genre === genre);
 }
 
-function WelcomeScreen(props: PropsFromRedux): JSX.Element | null {
-  const history = useHistory();
-  const isLoadedPromo = props.promo.id !== -1;
-  if (!isLoadedPromo) {return null;}
+function WelcomeScreen(): JSX.Element {
+  const promo = useSelector(getPromo);
+  const currentGenre = useSelector(getCurrentGenre);
+  const films = useSelector(getFilms);
+  const filmNumberLimit = useSelector(getFilmLimit);
+  const favoriteFilms = useSelector(getFavoriteFilms);
 
-  const {promo, currentGenre, films, filmNumberLimit} = props;
+  const dispatch = useDispatch();
+
   const {id, name, genre, released, posterImage, backgroundImage} = promo;
 
   const filmsByGenre = getFilmsByGenre(currentGenre, films);
+
+  useEffect(() => {
+    dispatch(changeGenre(ALL_GENRES));
+    dispatch(resetFilmLimit());
+    dispatch(resetFavoriteFilms);
+    const matchedPromo = favoriteFilms.find((film: Film) => film.id === promo.id);
+    if (matchedPromo) {
+      dispatch(loadPromo(matchedPromo));
+    }
+  }, []);
 
   return (
     <>
@@ -69,22 +76,11 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element | null {
               </p>
 
               <div className="film-card__buttons">
-                <button
-                  className="btn btn--play film-card__button"
-                  type="button"
-                  onClick={() => history.push(`${AppRoute.Player}${id}`)}
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <PlayerBtn
+                  id={String(id)}
+                />
+
+                <OwnListBtn film={promo}/>
               </div>
             </div>
           </div>
@@ -94,13 +90,11 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element | null {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <Genre
-            films={films}
-          />
+          <Genre/>
 
           <FilmList
             filmsCount={filmsByGenre.length > filmNumberLimit ? filmNumberLimit : filmsByGenre.length}
-            typeList={FilmListType.MainList}
+            films={filmsByGenre}
           />
 
           {filmsByGenre.length > filmNumberLimit ? <ShowMore /> : ''}
@@ -113,4 +107,4 @@ function WelcomeScreen(props: PropsFromRedux): JSX.Element | null {
   );
 }
 
-export default connector (WelcomeScreen);
+export default WelcomeScreen;

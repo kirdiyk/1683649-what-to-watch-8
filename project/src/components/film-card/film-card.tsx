@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {Film} from '../../types/film';
 import {AppRoute} from '../../const';
 import Video from '../video/video';
@@ -11,6 +11,8 @@ type FilmCardProps = {
 function FilmCard({film}: FilmCardProps) : JSX.Element {
   const activeRef = useRef<boolean>(false);
   const [isPreviewVideo, setIsPreviewVideo] = useState(false);
+
+  const history = useHistory();
 
   return (
     <article
@@ -29,9 +31,13 @@ function FilmCard({film}: FilmCardProps) : JSX.Element {
         setIsPreviewVideo(false);
       }}
     >
-      <div className="small-film-card__image">
+      <div className="small-film-card__image"
+        onClick={() =>
+          history.push(`${AppRoute.Film}${film.id}`)}
+        style={{cursor: 'pointer'}}
+      >
         {isPreviewVideo ?
-          <Video videoPreviewLink={film.previewVideoLink} posterImage={film.posterImage} />
+          <Video link={film.previewVideoLink} poster={film.posterImage} autoplay muted />
           : <img src={film.previewImage} alt={film.name} width="280" height="175"/>}
       </div>
       <h3 className="small-film-card__title">

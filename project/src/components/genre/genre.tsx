@@ -1,35 +1,22 @@
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
-import {MouseEvent} from 'react';
 import {Film} from '../../types/film';
 import {CLASS_GENRE_ACTIVE, ALL_GENRES, AppRoute} from '../../const';
-import { States } from '../../types/states';
 import {changeGenre, resetFilmLimit} from '../../store/actions';
+import {getCurrentGenre} from '../../store/catalog-process/selectors';
+import {getFilms} from '../../store/films-data/selectors';
 
-type GenreProps = {
-  films: Film[];
-  currentGenre: string;
-}
+function Genre(): JSX.Element {
+  const currentGenre = useSelector(getCurrentGenre);
+  const films = useSelector(getFilms);
 
-const mapStateToProps = ({currentGenre}: States) => ({
-  currentGenre: currentGenre,
-});
+  const dispatch = useDispatch();
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onChangeGenre(genre: string) {
+  const onChangeGenre = (genre: string) => {
     dispatch(changeGenre(genre));
     dispatch(resetFilmLimit());
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & GenreProps;
-
-function Genre(props: ConnectedComponentProps): JSX.Element {
-  const {films, currentGenre, onChangeGenre} = props;
+  };
 
   const nonUniqueGenreList = films.map((film: Film) => film.genre);
   const uniqueGenreList = new Set(nonUniqueGenreList);
@@ -44,7 +31,7 @@ function Genre(props: ConnectedComponentProps): JSX.Element {
         >
           <Link to={AppRoute.Root}
             className='catalog__genres-link'
-            onClick={(evt: MouseEvent<HTMLAnchorElement>) => {
+            onClick={(evt) => {
               onChangeGenre(evt.currentTarget.innerText);
             }}
           >
@@ -55,5 +42,4 @@ function Genre(props: ConnectedComponentProps): JSX.Element {
   );
 }
 
-//export {Genre};
-export default connector(Genre);
+export default Genre;

@@ -1,27 +1,18 @@
-import {AuthorizationStatus, AppRoute} from '../../const';
-import {connect, ConnectedProps} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {ThunkAppDispatch} from '../../types/action';
+import {AuthorizationStatus, AppRoute} from '../../const';
 import {logoutAction} from '../../store/actions-api';
-import {States} from '../../types/states';
+import {getAuthorizationStatus, getUser} from '../../store/user-process/selectors';
 
-const mapStateToProps = ({authorizationStatus, user}: States) => ({
-  authorizationStatus,
-  user,
-});
+function User(): JSX.Element {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const user = useSelector(getUser);
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  onLogout() {
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
     dispatch(logoutAction());
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function User(props: PropsFromRedux): JSX.Element {
-  const {authorizationStatus, user, onLogout} = props;
+  };
 
   return (
     <ul className="user-block">
@@ -39,16 +30,15 @@ function User(props: PropsFromRedux): JSX.Element {
       </li>
       <li className="user-block__item">
         {(authorizationStatus === AuthorizationStatus.Auth) ?
-          <Link
+          <a
             className="user-block__link"
-            to={AppRoute.Root}
             onClick={() => onLogout()}
           >
             Sign out
-          </Link> :
+          </a> :
           <Link className="user-block__link" to={AppRoute.Login}>Sign in</Link>}
       </li>
     </ul>);
 }
 
-export default connector(User);
+export default User;

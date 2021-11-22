@@ -1,67 +1,87 @@
-
 import {ActionType} from '../types/action';
-import {AuthorizationStatus, AppRoute} from '../const';
+import {AppRoute, AuthorizationStatus} from '../const';
 import {Film} from '../types/film';
 import {Users} from '../types/users';
 import {FilmReview} from '../types/film-review';
+import {createAction} from '@reduxjs/toolkit';
 
-export const loadFilm = (film: Film) => ({
-  type: ActionType.LoadFilm,
-  payload: film,
-} as const);
+export const loadPromo = createAction(
+  ActionType.LoadPromo,
+  (film: Film) => ({
+    payload: film,
+  }),
+);
 
-export const loadSimilarFilms = (films: Film[]) => ({
-  type: ActionType.LoadSimilarFilms,
-  payload: films,
-} as const);
+export const loadFilms = createAction(
+  ActionType.LoadFilms,
+  (films: Film[]) => ({
+    payload: films,
+  }),
+);
 
-export const loadComments = (comments: FilmReview[]) => ({
-  type: ActionType.LoadComments,
-  payload: comments,
-} as const);
+export const loadFilm = createAction(
+  ActionType.LoadFilm,
+  (film: Film) => ({
+    payload: film,
+  }),
+);
 
-export const changeUser = (user: Users) => ({
-  type: ActionType.ChangeUser,
-  payload: user,
-} as const);
+export const loadSimilarFilms = createAction(
+  ActionType.LoadSimilarFilms,
+  (films: Film[]) => ({
+    payload: films,
+  }),
+);
 
-export const redirectToRoute = (url: AppRoute | string) => ({
-  type: ActionType.RedirectToRoute,
-  payload: url,
-} as const);
+export const loadComments = createAction(
+  ActionType.LoadComments,
+  (comments: FilmReview[]) => ({
+    payload: comments,
+  }),
+);
 
-export const loadPromo = (film: Film) => ({
-  type: ActionType.LoadPromo,
-  payload: film,
-}as const);
+export const changeGenre = createAction(
+  ActionType.ChangeGenre,
+  (genre: string) => ({
+    payload: genre,
+  }),
+);
 
-export const loadFilms = (films: Film[]) => ({
-  type: ActionType.LoadFilms,
-  payload: films,
-} as const);
+export const changeLimitCounter = createAction(ActionType.ChangeLimitCounter);
 
-export const changeGenre = (genre: string) => ({
-  type: ActionType.ChangeGenre,
-  payload: genre,
-} as const);
+export const changeFilmLimit = createAction(ActionType.ChangeFilmLimit);
 
-export const changeLimitCounter = () => ({
-  type: ActionType.ChangeLimitCounter,
-} as const);
+export const resetFilmLimit = createAction(ActionType.ResetFilmLimit);
 
-export const changeFilmLimit = () => ({
-  type: ActionType.ChangeFilmLimit,
-} as const);
+export const requireAuthorization = createAction(
+  ActionType.RequireAuthorization,
+  (authStatus: AuthorizationStatus) => ({
+    payload: authStatus,
+  }),
+);
 
-export const resetFilmLimit = () => ({
-  type: ActionType.ResetFilmLimit,
-} as const);
+export const requireLogout = createAction(ActionType.RequireLogout);
 
-export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
-  type: ActionType.RequireAuthorization,
-  payload: authStatus,
-} as const);
+export const changeUser = createAction(
+  ActionType.ChangeUser,
+  (user: Users) => ({
+    payload: user,
+  }),
+);
 
-export const requireLogout = () => ({
-  type: ActionType.RequireLogout,
-} as const);
+export const redirectToRoute = createAction(
+  ActionType.RedirectToRoute,
+  (url: AppRoute | string) => ({
+    payload: url,
+  }),
+);
+
+export const loadFavoriteFilms = createAction(
+  ActionType.LoadFavoriteFilms,
+  (favoriteFilms: Film[]) => ({
+    payload: favoriteFilms,
+  }),
+);
+
+export const resetFavoriteFilms = createAction(ActionType.ResetFavoriteFilms);
+

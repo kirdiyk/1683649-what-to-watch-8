@@ -1,3 +1,4 @@
+import React from 'react';
 function Footer() : JSX.Element {
   return (
     <footer className="page-footer">
@@ -16,4 +17,4 @@ function Footer() : JSX.Element {
   );
 }
 
-export default Footer;
+export default React.memo(Footer);

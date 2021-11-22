@@ -1,42 +1,45 @@
-import {Link, useParams, useHistory} from 'react-router-dom';
-import {useEffect} from 'react';
-import {connect, ConnectedProps} from 'react-redux';
+import React, {useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import FilmList from '../film-list/film-list';
-import {AppRoute, AuthorizationStatus, FilmListType, SIMILAR_FILM_NUMBER} from '../../const';
+import {AuthorizationStatus, SIMILAR_FILM_NUMBER, TabType} from '../../const';
+import {useSelector} from 'react-redux';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import Tabs from '../tabs/tabs';
-import {States} from '../../types/states';
 import User from '../user/user';
 import {fetchCommentsAction, fetchFilmInfoAction, fetchSimilarFilmsAction} from '../../store/actions-api';
-import {ThunkAppDispatch} from '../../types/action';
 import {store} from '../../index';
+import AddBtn from '../add-btn/add-btn';
+import {getComments, getCurrentFilm, getSimilarFilms} from '../../store/films-data/selectors';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import PlayerBtn from '../player-btn/player-btn';
+import OwnListBtn from '../own-list-btn/own-list-btn';
 
 type FilmParam = {
   id: string;
 }
 
-const mapStatesProps = ({currentFilm, comments, authorizationStatus}: States) => ({
-  currentFilm,
-  comments,
-  authorizationStatus,
-});
+function MoviePage() : JSX.Element {
+  const currentFilm = useSelector(getCurrentFilm);
+  const comments = useSelector(getComments);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const similarFilms = useSelector(getSimilarFilms);
 
-const connector = connect(mapStatesProps);
+  const [activeTab, setActiveTab] = React.useState(TabType.Overview);
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
+  const handleTabClick = React.useCallback(
+    (tab): void => setActiveTab(tab),
+    [],
+  );
 
-function MoviePage(props: PropsFromRedux) : JSX.Element {
-  const {currentFilm, comments, authorizationStatus} = props;
   const {id} = useParams<FilmParam>();
 
   useEffect(() => {
-    (store.dispatch as ThunkAppDispatch)(fetchFilmInfoAction(Number(id)));
-    (store.dispatch as ThunkAppDispatch)(fetchSimilarFilmsAction(Number(id)));
-    (store.dispatch as ThunkAppDispatch)(fetchCommentsAction(Number(id)));
+    store.dispatch(fetchFilmInfoAction(Number(id)));
+    store.dispatch(fetchSimilarFilmsAction(Number(id)));
+    store.dispatch(fetchCommentsAction(Number(id)));
+    setActiveTab(TabType.Overview);
   }, [id]);
-
-  const history = useHistory();
 
   return (
     <>
@@ -50,11 +53,10 @@ function MoviePage(props: PropsFromRedux) : JSX.Element {
 
           <header className="page-header film-card__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
-                <Logo/>
-              </a>
+              <Logo />
             </div>
-            <User/>
+
+            <User />
           </header>
 
           <div className="film-card__wrap">
@@ -66,24 +68,18 @@ function MoviePage(props: PropsFromRedux) : JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={() => history.push(`${AppRoute.Player}${id}`)}>
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+
+                <PlayerBtn
+                  id={String(currentFilm.id)}
+                />
+
+                <OwnListBtn film={currentFilm}/>
+
                 {
                   authorizationStatus === AuthorizationStatus.Auth ?
-                    <Link className="btn film-card__button" to={`${AppRoute.Film}${id}${AppRoute.AddReview}`}>
-                      Add review
-                    </Link> : ''
+                    <AddBtn /> : ''
                 }
+
               </div>
             </div>
           </div>
@@ -92,11 +88,15 @@ function MoviePage(props: PropsFromRedux) : JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327"/>
+              <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218"
+                height="327"
+              />
             </div>
             <Tabs
-              film = {currentFilm}
-              comments = {comments}
+              tab={activeTab}
+              film={currentFilm}
+              comments={comments}
+              onClick={handleTabClick}
             />
           </div>
         </div>
@@ -106,7 +106,10 @@ function MoviePage(props: PropsFromRedux) : JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmList typeList={FilmListType.SimilarList} filmsCount={SIMILAR_FILM_NUMBER}/>
+          <FilmList
+            filmsCount={SIMILAR_FILM_NUMBER}
+            films={similarFilms}
+          />
         </section>
 
         <Footer />
@@ -115,4 +118,4 @@ function MoviePage(props: PropsFromRedux) : JSX.Element {
   );
 }
 
-export default connector(MoviePage);
+export default MoviePage;

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kirdiyk/1683649-what-to-watch-8/issues"
   },
-  "homepage": "https://github.com/kirdiyk/1683649-what-to-watch-8#readme"
+  "homepage": "https://github.com/kirdiyk/1683649-what-to-watch-8#readme",
+  "dependencies": {
+    "format-duration": "^1.4.0"
+  }
 }

@@ -50,6 +50,7 @@ export enum APIRoute {
   Logout = '/logout',
   Similar = '/similar',
   Comments = '/comments',
+  Favorite = '/favorite',
 }
 
 export enum FilmListType {
@@ -57,6 +58,46 @@ export enum FilmListType {
   SimilarList = 'SimilarList',
   UserList = 'UserList',
 }
+
+export const initialFilm = {
+  id: 0,
+  name:	'',
+  posterImage:	'',
+  previewImage:	'',
+  backgroundImage:	'',
+  backgroundColor:	'',
+  description: '',
+  rating:	0,
+  scoresCount:	0,
+  director:	'',
+  starring: [],
+  runTime:	0,
+  genre:	'',
+  released:	0,
+  isFavorite:	false,
+  videoLink:	'',
+  previewVideoLink:	'',
+};
+
+export const initialUser = {
+  id: 0,
+  email: '',
+  name: '',
+  avatarUrl: '',
+  token: '',
+};
+
+export enum RatingGrades {
+  Bad = 0,
+  Normal = 3,
+  Good = 5,
+  VeryGood = 8,
+  Awesome = 10,
+}
+
+export const BACKGROUND_REVIEW_FORM = 'rgba(255, 255, 255, 0.4)';
+
+export const LIMIT_COUNTER_START = 1;
 
 export const CLASS_TAB_ACTIVE = 'film-nav__item--active';
 

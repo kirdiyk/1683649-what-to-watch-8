@@ -1,9 +1,9 @@
 import {useState, FormEvent, ChangeEvent} from 'react';
-import {connect, ConnectedProps} from 'react-redux';
 import {useParams} from 'react-router-dom';
-import {ThunkAppDispatch} from '../../types/action';
+import {useDispatch} from 'react-redux';
 import {ReviewData} from '../../types/review-data';
 import {reviewAction} from '../../store/actions-api';
+import {BACKGROUND_REVIEW_FORM} from '../../const';
 
 const grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -11,23 +11,19 @@ type FilmParam = {
   id: string;
 }
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  onSubmit(reviewData: ReviewData, errorHandler: (error: string) => void) {
-    dispatch(reviewAction(reviewData, errorHandler));
-  },
-});
-
-const connector = connect(null, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function ReviewForm({onSubmit}: PropsFromRedux): JSX.Element {
+function ReviewForm(): JSX.Element {
   const [userGrades, setUserGrades] = useState(0);
   const [userComment, setUserComment] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isSending, setSending] = useState(false);
 
   const {id} = useParams<FilmParam>();
+
+  const dispatch = useDispatch();
+
+  const onSubmit = (reviewData: ReviewData, errorHandler: (error: string) => void) => {
+    dispatch(reviewAction(reviewData, errorHandler));
+  };
 
   return (
     <div className="add-review">
@@ -56,6 +52,7 @@ function ReviewForm({onSubmit}: PropsFromRedux): JSX.Element {
               {grades.map((grade) => (
                 <>
                   <input
+                    key={grade}
                     className="rating__input"
                     id={`star-${grade}`}
                     type="radio"
@@ -71,7 +68,7 @@ function ReviewForm({onSubmit}: PropsFromRedux): JSX.Element {
             </div>
           </div>
 
-          <div className="add-review__text">
+          <div className="add-review__text" style={{background: BACKGROUND_REVIEW_FORM}}>
             <textarea
               className="add-review__textarea"
               name="review-text" id="review-text"
@@ -97,4 +94,4 @@ function ReviewForm({onSubmit}: PropsFromRedux): JSX.Element {
   );
 }
 
-export default connector (ReviewForm);
+export default ReviewForm;

@@ -1,44 +1,15 @@
+import React from 'react';
 import FilmCard from '../film-card/film-card';
-import {States} from '../../types/states';
-import {connect, ConnectedProps} from 'react-redux';
-import {FilmListType} from '../../const';
+import {Film} from '../../types/film';
 
 type FilmListProps = {
   filmsCount: number;
-  typeList: string;
+  films: Film[];
 }
 
-const mapStatesProps = ({films, similarFilms}: States) => ({
-  films,
-  similarFilms,
-});
-
-const connector = connect(mapStatesProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-type ConnectedComponentProps = PropsFromRedux & FilmListProps;
-
-function FilmList(props: ConnectedComponentProps) : JSX.Element {
-  const {
-    filmsCount,
-    typeList,
-    films,
-    similarFilms} = props;
-
-  function getCards(type: string) {
-    switch (type) {
-      case FilmListType.MainList:
-        return films;
-      case FilmListType.SimilarList:
-        return similarFilms;
-    }
-  }
-
-  const filmCards = getCards(typeList);
-
-  if (filmCards && filmCards.length > 0) {
-    const cards = filmCards.length <= filmsCount ? filmCards : filmCards.slice(0, filmsCount);
+function FilmList({filmsCount, films}: FilmListProps) : JSX.Element {
+  if (films && films.length > 0) {
+    const cards = films.length <= filmsCount ? films : films.slice(0, filmsCount);
     return (
       <div className="catalog__films-list">
         {cards.map((card) => {
@@ -61,4 +32,4 @@ function FilmList(props: ConnectedComponentProps) : JSX.Element {
   );
 }
 
-export default connector (FilmList);
+export default React.memo(FilmList);

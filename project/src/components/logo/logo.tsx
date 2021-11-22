@@ -1,9 +1,10 @@
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 
- type LogoProps = {
-   extraClassNameProp? : string;
- }
+type LogoProps = {
+  extraClassNameProp? : string;
+}
 
 function Logo({extraClassNameProp = ''} : LogoProps): JSX.Element {
   return (
@@ -15,4 +16,4 @@ function Logo({extraClassNameProp = ''} : LogoProps): JSX.Element {
   );
 }
 
-export default Logo;
+export default React.memo(Logo);

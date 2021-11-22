@@ -1,33 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
+import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
-import {reducer} from './store/reducer';
 import { createAPI } from './api';
 import {requireAuthorization} from './store/actions';
 import {fetchFilmAction, checkAuthAction, fetchPromoFilmAction} from './store/actions-api';
-import {ThunkAppDispatch} from './types/action';
 import {AuthorizationStatus} from './const';
 import {redirect} from './store/middlewares/redirect';
+import {rootReducer} from './store/reducer-root';
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
 );
 
-export const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(api)),
-    applyMiddleware(redirect),
-  ),
-);
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }).concat(redirect),
+});
 
-(store.dispatch as ThunkAppDispatch)(checkAuthAction());
-(store.dispatch as ThunkAppDispatch)(fetchFilmAction());
-(store.dispatch as ThunkAppDispatch)(fetchPromoFilmAction());
+store.dispatch(checkAuthAction());
+store.dispatch(fetchFilmAction());
+store.dispatch(fetchPromoFilmAction());
 
 ReactDOM.render(
   <React.StrictMode>

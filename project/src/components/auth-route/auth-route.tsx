@@ -13,7 +13,7 @@ type PrivateRouteProps = RouteProps & {
   render: (props: RenderFuncProps) => JSX.Element;
 }
 
-function RoutePrivate(props: PrivateRouteProps): JSX.Element {
+function AuthRoute(props: PrivateRouteProps): JSX.Element {
   const {exact, path, render} = props;
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
@@ -21,13 +21,14 @@ function RoutePrivate(props: PrivateRouteProps): JSX.Element {
     <Route
       exact={exact}
       path={path}
-      render={(routeProps) => (
-        authorizationStatus === AuthorizationStatus.Auth
-          ? render(routeProps)
-          : <Redirect to={AppRoute.Login} />
-      )}
+      render={(routeProps) => {
+        if (authorizationStatus === AuthorizationStatus.Auth && path === AppRoute.Login) {
+          return <Redirect to={AppRoute.Root} />;
+        }
+        return render(routeProps);
+      }}
     />
   );
 }
 
-export default RoutePrivate;
+export default AuthRoute;
