@@ -56,17 +56,25 @@ function PlayerControl() : JSX.Element {
   }, [id]);
 
   useEffect(() => {
-    if (videoRef.current === null) {
-      return;
-    }
-
-    if (isPlaying) {
+    if (videoRef.current && !isLoading) {
       videoRef.current.play();
-      return;
+      setIsPlaying(true);
     }
+  }, [isLoading]);
 
-    videoRef.current.pause();
-  }, [isPlaying]);
+  const handlePlay = () =>{
+    if (videoRef.current){
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  const handlePause = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
 
   useEffect(() => {
     store.dispatch(fetchFilmInfoAction(Number(id)));
@@ -125,9 +133,7 @@ function PlayerControl() : JSX.Element {
             <button
               type="button"
               className="player__play"
-              onClick={() => {
-                setIsPlaying(false);
-              }}
+              onClick={handlePause}
               disabled={isLoading}
             >
               <svg viewBox="0 0 14 21" width="14" height="21">
@@ -138,9 +144,7 @@ function PlayerControl() : JSX.Element {
             <button
               type="button"
               className="player__play"
-              onClick={() => {
-                setIsPlaying(true);
-              }}
+              onClick={handlePlay}
             >
               <svg viewBox="0 0 19 19" width="19" height="19">
                 <use xlinkHref="#play-s"></use>

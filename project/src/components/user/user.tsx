@@ -19,23 +19,25 @@ function User(): JSX.Element {
       <li className="user-block__item">
         <div className="user-block__avatar">
           <Link to={AppRoute.OwnList}>
-            <img
-              src={user.avatarUrl === '' ? 'img/avatar.jpg' : user.avatarUrl}
-              alt="User avatar"
-              width="63"
-              height="63"
-            />
+            {(authorizationStatus === AuthorizationStatus.Auth) ?
+              <img
+                src={user.avatarUrl === '' ? 'img/avatar.jpg' : user.avatarUrl}
+                alt="User avatar"
+                width="63"
+                height="63"
+              /> : ''}
           </Link>
         </div>
       </li>
       <li className="user-block__item">
         {(authorizationStatus === AuthorizationStatus.Auth) ?
-          <a
+          <Link
             className="user-block__link"
+            to={AppRoute.Root}
             onClick={() => onLogout()}
           >
             Sign out
-          </a> :
+          </Link> :
           <Link className="user-block__link" to={AppRoute.Login}>Sign in</Link>}
       </li>
     </ul>);
