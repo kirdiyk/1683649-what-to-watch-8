@@ -36,13 +36,13 @@ function App(): JSX.Element {
         <AuthRoute
           exact
           path={AppRoute.Login}
-          render={({history}) => <SignIn />}
+          render={() => <SignIn />}
         >
         </AuthRoute>
         <PrivateRoute
           exact
           path = {AppRoute.OwnList}
-          render = {({history}) => <OwnList />}
+          render = {() => <OwnList />}
         >
         </PrivateRoute>
         <PrivateRoute

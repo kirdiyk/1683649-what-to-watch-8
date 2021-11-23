@@ -1,4 +1,4 @@
-import {Film} from '../../types/film';
+//import {Film} from '../../types/film';
 
 type ReviewProps = {
   author: string;
@@ -6,10 +6,10 @@ type ReviewProps = {
   dateText: string;
   quote: string;
   rating: number;
-  film: Film;
+  //film: Film;
 }
 
-function Review({film, author, dateTime, dateText, quote, rating} : ReviewProps) : JSX.Element {
+function Review({author, dateTime, dateText, quote, rating} : ReviewProps) : JSX.Element {
   return (
     <div className="review">
       <blockquote className="review__quote">

@@ -1,9 +1,10 @@
 import React from 'react';
 import {Film} from '../../types/film';
 import { CLASS_TAB_ACTIVE, Rating, RatingGrades, TabType} from '../../const';
-import {formatDate, humanizeDate} from '../../utils';
+import {formatDate, humanizeDate, formatTime} from '../../utils';
 import Review from '../review/review';
 import {FilmReview} from '../../types/film-review';
+
 
 type TabsProps = {
   film: Film;
@@ -37,13 +38,6 @@ function Tabs(props: TabsProps): JSX.Element {
       case filmRating === RatingGrades.Awesome:
         return Rating.Awesome;
     }
-  }
-
-  function humanizeTime(filmDuration: number): string {
-    const hours = Math.trunc(filmDuration/60) > 0 ? Math.trunc(filmDuration/60) : '';
-    const minutes = filmDuration%60;
-
-    return `${hours}h ${minutes}m`;
   }
 
   function getActiveTabContent(tabName: string) {
@@ -90,7 +84,7 @@ function Tabs(props: TabsProps): JSX.Element {
             <div className="film-card__text-col">
               <p className="film-card__details-item">
                 <strong className="film-card__details-name">Run Time</strong>
-                <span className="film-card__details-value">{humanizeTime(runTime)}</span>
+                <span className="film-card__details-value">{formatTime(runTime)}</span>
               </p>
               <p className="film-card__details-item">
                 <strong className="film-card__details-name">Genre</strong>
@@ -110,7 +104,6 @@ function Tabs(props: TabsProps): JSX.Element {
               {comments !== null ? comments.map((review) => (
                 <Review
                   key = {review.id}
-                  film={film}
                   author={review.user.name}
                   dateTime={formatDate(review.date)}
                   dateText={humanizeDate(review.date)}

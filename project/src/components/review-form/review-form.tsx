@@ -3,9 +3,7 @@ import {useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {ReviewData} from '../../types/review-data';
 import {reviewAction} from '../../store/actions-api';
-import {BACKGROUND_REVIEW_FORM} from '../../const';
-
-const grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+import {BACKGROUND_REVIEW_FORM, COMMENT_LENGHT_MAX, COMMENT_LENGHT_MIN, GRADES, USER_GRADES_NULL} from '../../const';
 
 type FilmParam = {
   id: string;
@@ -49,7 +47,7 @@ function ReviewForm(): JSX.Element {
         <fieldset style={{border: 'none', padding: 0}} disabled={isSending}>
           <div className="rating">
             <div className="rating__stars">
-              {grades.map((grade) => (
+              {GRADES.map((grade) => (
                 <>
                   <input
                     key={grade}
@@ -82,7 +80,7 @@ function ReviewForm(): JSX.Element {
               <button
                 className="add-review__btn"
                 type="submit"
-                disabled={!(userGrades > 0 && userComment.length >= 50 && userComment.length <= 400)}
+                disabled={!(userGrades > USER_GRADES_NULL && userComment.length >= COMMENT_LENGHT_MIN && userComment.length <= COMMENT_LENGHT_MAX)}
               >
                 Post
               </button>

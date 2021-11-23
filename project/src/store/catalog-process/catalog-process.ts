@@ -19,13 +19,13 @@ const catalogProcess = createReducer(initialState, (builder) => {
       const currentGenre = action.payload;
       state.currentGenre = currentGenre;
     })
-    .addCase(changeLimitCounter, (state, action) => {
+    .addCase(changeLimitCounter, (state) => {
       state.limitCounter = state.limitCounter + 1;
     })
-    .addCase(changeFilmLimit, (state, action) => {
+    .addCase(changeFilmLimit, (state) => {
       state.filmNumberLimit = state.filmNumberLimit * state.limitCounter;
     })
-    .addCase(resetFilmLimit, (state, action) => {
+    .addCase(resetFilmLimit, (state) => {
       state.limitCounter = initialState.limitCounter;
       state.filmNumberLimit = initialState.filmNumberLimit;
     });

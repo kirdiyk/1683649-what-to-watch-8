@@ -1,5 +1,4 @@
 import {AppRoute} from '../../const';
-import React from 'react';
 import {useHistory} from 'react-router-dom';
 
 type PlayerBtnProps = {

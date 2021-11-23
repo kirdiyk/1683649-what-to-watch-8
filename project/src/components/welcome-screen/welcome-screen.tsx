@@ -97,7 +97,7 @@ function WelcomeScreen(): JSX.Element {
             films={filmsByGenre}
           />
 
-          {filmsByGenre.length > filmNumberLimit ? <ShowMore /> : ''}
+          {(filmsByGenre.length > filmNumberLimit) && <ShowMore />}
 
         </section>
 

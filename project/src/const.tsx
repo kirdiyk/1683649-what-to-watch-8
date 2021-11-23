@@ -108,3 +108,13 @@ export const CLASS_GENRE_ACTIVE = 'catalog__genres-item--active';
 export const STEP_FILMS = 8;
 
 export const SIMILAR_FILM_NUMBER = 4;
+
+export const GRADES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+export const USER_GRADES_NULL = 0;
+
+export const COMMENT_LENGHT_MIN = 50;
+
+export const COMMENT_LENGHT_MAX = 400;
+
+

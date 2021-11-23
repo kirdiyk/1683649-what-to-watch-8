@@ -1,4 +1,3 @@
-import React from 'react';
 import {useDispatch} from 'react-redux';
 import {favoriteAction} from '../../store/actions-api';
 import {Film} from '../../types/film';

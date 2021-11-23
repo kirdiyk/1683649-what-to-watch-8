@@ -12,3 +12,10 @@ export function humanizeDate(dateISO: string): string {
   const date = new Date(dateISO);
   return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
+
+export function formatTime(filmDuration: number): string {
+  const hours = Math.trunc(filmDuration/60) > 0 ? Math.trunc(filmDuration/60) : '';
+  const minutes = filmDuration%60;
+
+  return `${hours}h ${minutes}m`;
+}
