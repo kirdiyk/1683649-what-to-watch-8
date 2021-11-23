@@ -17,7 +17,7 @@ const userProcess = createReducer(initialState, (builder) => {
       state.authorizationStatus = authorizationStatus;
       state.isDataLoaded = true;
     })
-    .addCase(requireLogout, (state, action) => {
+    .addCase(requireLogout, (state, action) => { // action не используется
       state.authorizationStatus = AuthorizationStatus.NoAuth;
     })
     .addCase(changeUser, (state, action) => {
@@ -28,7 +28,7 @@ const userProcess = createReducer(initialState, (builder) => {
       const favoriteFilms = action.payload;
       state.favoriteFilms = favoriteFilms;
     })
-    .addCase(resetFavoriteFilms, (state, action) => {
+    .addCase(resetFavoriteFilms, (state, action) => { // action не используется
       state.favoriteFilms = initialState.favoriteFilms;
     });
 });

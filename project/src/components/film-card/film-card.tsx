@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef} from 'react'; // React не используется
 import {Link, useHistory} from 'react-router-dom';
 import {Film} from '../../types/film';
 import {AppRoute} from '../../const';

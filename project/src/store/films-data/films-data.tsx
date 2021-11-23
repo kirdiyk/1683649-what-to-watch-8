@@ -33,7 +33,7 @@ const filmsData = createReducer(initialState, (builder) => {
       const comments = action.payload;
       state.comments = comments;
     })
-    .addCase(resetFavoriteFilms, (state, action) => {
+    .addCase(resetFavoriteFilms, (state, action) => { // action не используется
       state.promoFilm.isFavorite = false;
       state.currentFilm.isFavorite = false;
     });

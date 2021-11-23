@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
-import { createAPI } from './api';
+import { createAPI } from './api'; // пробелы
 import {requireAuthorization} from './store/actions';
 import {fetchFilmAction, checkAuthAction, fetchPromoFilmAction} from './store/actions-api';
 import {AuthorizationStatus} from './const';

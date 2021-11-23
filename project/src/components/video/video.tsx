@@ -24,7 +24,7 @@ function Video(props: VideoProps): JSX.Element {
         videoRef.current = null;
       }
     };
-  }, [link]);
+  }, [link]); // желательно все зависимости указывать, если нет крайней необходимости не делать этого
 
   return (
     <video

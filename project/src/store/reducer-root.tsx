@@ -3,6 +3,7 @@ import {filmsData} from './films-data/films-data';
 import {catalogProcess} from './catalog-process/catalog-process';
 import {userProcess} from './user-process/user-process';
 
+// нарушен критерий Б9 именование перечислений
 export enum NameSpace {
   data = 'DATA',
   catalog = 'CATALOG',

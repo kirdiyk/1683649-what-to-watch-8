@@ -39,6 +39,8 @@ function Tabs(props: TabsProps): JSX.Element {
     }
   }
 
+  // жестокое название хД, обычно просто formatTime называют или как-то так
+  // и можно вынести в utils подобные функции у тебя там
   function humanizeTime(filmDuration: number): string {
     const hours = Math.trunc(filmDuration/60) > 0 ? Math.trunc(filmDuration/60) : '';
     const minutes = filmDuration%60;
@@ -132,6 +134,7 @@ function Tabs(props: TabsProps): JSX.Element {
             className={`film-nav__item ${tab === TabType.Overview ? CLASS_TAB_ACTIVE : ''}`}
             key={TabType.Overview}
           >
+            лучше Link
             <a
               className="film-nav__link"
               onClick={() => onClick(TabType.Overview)}
@@ -143,6 +146,7 @@ function Tabs(props: TabsProps): JSX.Element {
             className={`film-nav__item ${tab === TabType.Details ? CLASS_TAB_ACTIVE : ''}`}
             key={TabType.Details}
           >
+             лучше Link
             <a
               className="film-nav__link"
               onClick={() => onClick(TabType.Details)}
@@ -154,6 +158,7 @@ function Tabs(props: TabsProps): JSX.Element {
             className={`film-nav__item ${tab === TabType.Reviews ? CLASS_TAB_ACTIVE : ''}`}
             key={TabType.Reviews}
           >
+             лучше Link
             <a
               className="film-nav__link"
               onClick={() => onClick(TabType.Reviews)}

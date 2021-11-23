@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // не используется
 import {useDispatch} from 'react-redux';
 import {favoriteAction} from '../../store/actions-api';
 import {Film} from '../../types/film';
@@ -22,7 +22,7 @@ function OwnListBtn({film}: OwnListBtnProps): JSX.Element {
         onClick = {() => onClick()}
       >
         <svg viewBox="0 0 18 14" width="18" height="14">
-          <use xlinkHref="#in-list"></use>
+          <use xlinkHref="#in-list"></use> меняется только иконка
         </svg>
         <span>My list</span>
       </button>

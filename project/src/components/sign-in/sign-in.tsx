@@ -35,7 +35,7 @@ function SignIn() : JSX.Element {
 
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
-
+      в идеале было бы форму в отдельный компонент вынести и даже инпуты, но оставим так
       <div className="sign-in user-page__content">
         <form className="sign-in__form" onSubmit={handleSubmit}>
           <div className="sign-in__fields">

@@ -9,6 +9,7 @@ type ReviewProps = {
   film: Film;
 }
 
+//проп film не используется
 function Review({film, author, dateTime, dateText, quote, rating} : ReviewProps) : JSX.Element {
   return (
     <div className="review">

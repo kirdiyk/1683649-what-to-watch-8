@@ -129,6 +129,7 @@ function PlayerControl() : JSX.Element {
         </div>
 
         <div className="player__controls-row">
+          в идеале лучше менять только колбек, иконку, а в остально вроде одинаковые компоненты
           {isPlaying ?
             <button
               type="button"

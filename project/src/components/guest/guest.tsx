@@ -6,6 +6,7 @@ function Guest() : JSX.Element {
       </div>
       <h1 className="visually-hidden">WTW</h1>
       <header className="page-header">
+        у тебя есть компонент лого
         <div className="logo">
           <a className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>

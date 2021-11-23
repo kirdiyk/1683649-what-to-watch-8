@@ -5,7 +5,7 @@ import {ReviewData} from '../../types/review-data';
 import {reviewAction} from '../../store/actions-api';
 import {BACKGROUND_REVIEW_FORM} from '../../const';
 
-const grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // это константа, надо в снейк кейсе записывать
 
 type FilmParam = {
   id: string;
@@ -64,7 +64,7 @@ function ReviewForm(): JSX.Element {
                   />
                   <label className="rating__label" htmlFor={`star-${grade}`}>Rating {grade}</label>
                 </>),
-              ).reverse()}
+              ).reverse()} здесь норм, потому что сначала мап, а так вообще опасный метод reverse потому что меняется исходный массив
             </div>
           </div>
 
@@ -82,6 +82,7 @@ function ReviewForm(): JSX.Element {
               <button
                 className="add-review__btn"
                 type="submit"
+                // магические значение и плюс лучше вынести в переменную
                 disabled={!(userGrades > 0 && userComment.length >= 50 && userComment.length <= 400)}
               >
                 Post

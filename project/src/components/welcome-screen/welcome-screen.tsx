@@ -96,8 +96,8 @@ function WelcomeScreen(): JSX.Element {
             filmsCount={filmsByGenre.length > filmNumberLimit ? filmNumberLimit : filmsByGenre.length}
             films={filmsByGenre}
           />
-
-          {filmsByGenre.length > filmNumberLimit ? <ShowMore /> : ''}
+          можно просто
+          {(filmsByGenre.length > filmNumberLimit) && <ShowMore />}
 
         </section>
 

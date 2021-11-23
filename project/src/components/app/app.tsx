@@ -36,25 +36,31 @@ function App(): JSX.Element {
         <AuthRoute
           exact
           path={AppRoute.Login}
-          render={({history}) => <SignIn />}
+          render={({history}) => <SignIn />} // {history} не используется удали
         >
         </AuthRoute>
         <PrivateRoute
           exact
           path = {AppRoute.OwnList}
-          render = {({history}) => <OwnList />}
+          render = {({history}) => <OwnList />}  // {history} не используется удали
         >
         </PrivateRoute>
         <PrivateRoute
           exact
-          path={`${AppRoute.Film}:id${AppRoute.AddReview}`}
+          path={`${AppRoute.Film}:id${AppRoute.AddReview}`} // шаблоны путей лучше в константы вынести
           render={() => (<AddReview/>)}
         >
         </PrivateRoute>
-        <Route exact path={`${AppRoute.Film}:id`}>
+        <Route
+          exact
+          path={`${AppRoute.Film}:id`} // шаблоны путей лучше в константы вынести
+        >
           <MoviePage />
         </Route>
-        <Route exact path={`${AppRoute.Player}:id`}>
+        <Route
+          exact
+          path={`${AppRoute.Player}:id`} // шаблоны путей лучше в константы вынести
+        >
           <PlayerControl/>
         </Route>
         <Route>

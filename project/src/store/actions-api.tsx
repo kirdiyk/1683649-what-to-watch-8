@@ -9,7 +9,7 @@ import {UserFromServer} from '../types/users';
 import {adaptToClientFilm, adaptToClientUser} from '../adapter';
 import {FilmReview} from '../types/film-review';
 import {ReviewData} from '../types/review-data';
-import { redirectToRoute } from './actions';
+import { redirectToRoute } from './actions'; //  если все везде без пробелов, то и тут не нужно в деструктуризации
 import {store} from '../index';
 
 export const fetchPromoFilmAction = (): ThunkActionResult =>

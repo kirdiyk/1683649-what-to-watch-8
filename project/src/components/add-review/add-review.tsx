@@ -43,6 +43,7 @@ function AddReview() : JSX.Element {
                 <Link to={filmPage} className="breadcrumbs__link">{currentFilm.name}</Link>
               </li>
               <li className="breadcrumbs__item">
+                {/* тега а поидее не должно быть */}
                 <a className="breadcrumbs__link">Add review</a>
               </li>
             </ul>
