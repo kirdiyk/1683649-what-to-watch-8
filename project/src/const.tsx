@@ -53,12 +53,15 @@ export enum APIRoute {
   Favorite = '/favorite',
 }
 
+<<<<<<< HEAD
 export enum FilmListType {
   MainList = 'MainList',
   SimilarList = 'SimilarList',
   UserList = 'UserList',
 }
 
+=======
+>>>>>>> 6dec789 (правки базовые критерии)
 export const initialFilm = {
   id: 0,
   name:	'',
@@ -117,4 +120,11 @@ export const COMMENT_LENGHT_MIN = 50;
 
 export const COMMENT_LENGHT_MAX = 400;
 
+<<<<<<< HEAD
+=======
+export const EMAIL_PATTERN = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+
+export const PASSWORD_PATTERN = /(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]+/;
+
+>>>>>>> 6dec789 (правки базовые критерии)
 

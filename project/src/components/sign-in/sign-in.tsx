@@ -1,26 +1,28 @@
-import {useRef, FormEvent} from 'react';
+import {FormEvent, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {loginAction} from '../../store/actions-api';
 import {Authentication} from '../../types/authentication';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
+import { EMAIL_PATTERN, PASSWORD_PATTERN } from '../../const';
 
 function SignIn() : JSX.Element {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
+  const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
   const dispatch = useDispatch();
 
   const onSubmit = (authData: Authentication) => {
     dispatch(loginAction(authData));
   };
 
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (email !== null && password !== null) {
       onSubmit({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
+        login: email,
+        password: password,
       });
     }
   };
@@ -38,13 +40,24 @@ function SignIn() : JSX.Element {
 
       <div className="sign-in user-page__content">
         <form className="sign-in__form" onSubmit={handleSubmit}>
+          {!isValidEmail &&
+          <div className="sign-in__message">
+            <p>Please enter a valid email address</p>
+          </div>}
+
+          {!isValidPassword &&
+          <div className="sign-in__message">
+            <p>
+              Please enter a valid password
+            </p>
+          </div>}
           <div className="sign-in__fields">
-            <div className="sign-in__field">
-              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={loginRef}/>
+            <div className={`sign-in__field ${(!isValidEmail || !email) && 'sign-in__field--error'}`}>
+              <input id="user-email" className="sign-in__input" type="email" placeholder="Email address" name="user-email" required pattern={EMAIL_PATTERN.source} value={email} onChange={(evt) => setEmail(evt.currentTarget.value)} onBlur={(evt) => setIsValidEmail(!evt.currentTarget.validity.patternMismatch)}/>
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" ref={passwordRef}/>
+              <input id="user-password" className="sign-in__input" type="password" placeholder="Password" name="user-password" required pattern={PASSWORD_PATTERN.source} value={password} onChange={(evt) => setPassword(evt.currentTarget.value)} onBlur={(evt) => setIsValidPassword(!evt.currentTarget.validity.patternMismatch)}/>
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>

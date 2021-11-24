@@ -23,7 +23,11 @@ const catalogProcess = createReducer(initialState, (builder) => {
       state.limitCounter = state.limitCounter + 1;
     })
     .addCase(changeFilmLimit, (state) => {
+<<<<<<< HEAD
       state.filmNumberLimit = state.filmNumberLimit * state.limitCounter;
+=======
+      state.filmNumberLimit = STEP_FILMS * state.limitCounter;
+>>>>>>> 6dec789 (правки базовые критерии)
     })
     .addCase(resetFilmLimit, (state) => {
       state.limitCounter = initialState.limitCounter;
