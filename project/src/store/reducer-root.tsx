@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {filmsData} from './films-data/films-data';
-import {catalogProcess} from './catalog-process/catalog-process';
+import {catalogProcess} from './catalog-progress/catalog-process';
 import {userProcess} from './user-process/user-process';
 
 export enum Namespace {
