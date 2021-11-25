@@ -19,7 +19,7 @@ function SignIn() : JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (email !== null && password !== null) {
+    if (email && password) {
       onSubmit({
         login: email,
         password: password,
